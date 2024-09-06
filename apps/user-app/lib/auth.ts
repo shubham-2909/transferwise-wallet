@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: 'Phone number',
       credentials: {
         phone: {
           label: 'Phone number',

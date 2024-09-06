@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "exports": {
-    "./balance": "./src/hooks/useBalance"
+    "./balance": "./src/hooks/useBalance.ts"
   },
   "dependencies": {
     "@types/recoil": "^0.0.9",
