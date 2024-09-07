@@ -20,6 +20,8 @@ jobs:
 
       - name: Install Dependencies
         run: bun install
+      - name: Generate prisma client
+        run: bun run db:generate
 
       - name: Run Build
         run: bun run build
