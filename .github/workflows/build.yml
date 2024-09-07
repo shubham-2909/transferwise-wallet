@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install bun
+        run: npm install -g bun
+
+      - name: Instal dependancies
+        run: bun install
+
+      - name: Run Build
+        run: bun run build
