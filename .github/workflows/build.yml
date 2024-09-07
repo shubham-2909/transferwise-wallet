@@ -13,11 +13,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install bun
-        run: npm install -g bun
-
       - name: Instal dependancies
-        run: bun install
+        run: npm install
 
       - name: Run Build
-        run: bun run build
+        run: npm run build
