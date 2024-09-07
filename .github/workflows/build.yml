@@ -12,6 +12,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+      - name: Install node js types
+        run: npm install @types/node -D
 
       - name: Instal dependancies
         run: npm install
