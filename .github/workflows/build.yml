@@ -15,9 +15,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-
+      - name: Use bun as dependancy
+        run: npm install --global bun
       - name: Install Dependencies
-        run: npm install
+        run: bun install
 
       - name: Run Build
-        run: npm run build
+        run: bun run build
