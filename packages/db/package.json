@@ -13,8 +13,7 @@
   },
   "scripts": {
     "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate",
-    "postinstall": "prisma generate"
+    "db:push": "prisma db push --skip-generate"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
