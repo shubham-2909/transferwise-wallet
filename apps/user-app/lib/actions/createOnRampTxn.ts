@@ -12,7 +12,7 @@ export async function createOnRampTransaction(
   if (!session || !session.user) {
     throw new Error('Unauthoriized')
   }
-  const token = Math.random().toString()
+  const token = Math.random().toString() // ideally you should request hdfc apis in real world and get a token
   await prisma.onRampTransaction.create({
     data: {
       userId: Number(session.user.id),
