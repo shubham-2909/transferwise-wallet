@@ -18,9 +18,6 @@ jobs:
       - name: Use bun as dependancy
         run: npm install --global bun
 
-      - name: Generate prisma client
-        run: cd packages/db && bunx prisma generate
-
       - name: Install Dependencies
         run: bun install
 
