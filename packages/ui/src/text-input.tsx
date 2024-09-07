@@ -6,7 +6,7 @@ export const TextInput = ({
   label,
 }: {
   placeholder: string
-  onChange: (value: string) => void
+  onChange: (_value: string) => void
   label: string
 }) => {
   return (
