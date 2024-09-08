@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: stup bun
+      - name: setup bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
