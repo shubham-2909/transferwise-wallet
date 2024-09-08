@@ -24,3 +24,14 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: shubham2909/transferwise-wallet:latest
+      - name: deploy to ec2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            sudo docker pull shubham2909/transferwise-wallet:latest
+            sudo docker stop web-app || true
+            sudo docker rm web-app || true
+            sudo docker run -d --name web-app -p 3005:3000 100xdevs/web-app:latest
