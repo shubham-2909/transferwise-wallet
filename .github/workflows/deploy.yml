@@ -24,10 +24,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: shubham2909/transferwise-wallet:latest
-          secret-envs: |
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
-            AUTH_SECRET=${{ secrets.AUTH_SECRET }}
-            NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
       - name: deploy to ec2
         uses: appleboy/ssh-action@master
         with:
