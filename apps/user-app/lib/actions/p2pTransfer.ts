@@ -26,7 +26,6 @@ export async function p2pTransfer(amount: number, to: string) {
         userId: Number(session.user.id),
       },
     })
-    await new Promise((resolve) => setTimeout(resolve, 4000))
     if (!fromBalance || fromBalance.amount < amount) {
       throw new Error('Insufficient funds')
     }
