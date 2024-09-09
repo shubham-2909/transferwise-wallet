@@ -34,4 +34,9 @@ jobs:
             sudo docker pull shubham2909/transferwise-wallet:latest
             sudo docker stop web-app || true
             sudo docker rm web-app || true
-            sudo docker run -d --name web-app -p 3000:3000 100xdevs/web-app:latest
+            sudo docker rmi shubham2909/transferwise-wallet
+            sudo docker run -d --name web-app -p 3000:3000 \
+            -e DATABASE_URL='${{ secrets.DATABASE_URL }}' \
+            -e NEXTAUTH_URL='${{ secrets.NEXTAUTH_URL }}' \
+            -e AUTH_SECRET='${{ secrets.AUTH_SECRET }}' \
+            shubham2909/transferwise-wallet:latest
