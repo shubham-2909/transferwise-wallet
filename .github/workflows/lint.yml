@@ -1,0 +1,22 @@
+name: Linting and formatting on PR
+
+on:
+  pull_request:
+    branches:
+      - '*'
+jobs:
+  continous-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to repo
+        uses: actions/checkout@v3
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install --no-cache
+      - name: Lint check
+        run: bun run lint
+      - name: Format check
+        run: bun run format:check
