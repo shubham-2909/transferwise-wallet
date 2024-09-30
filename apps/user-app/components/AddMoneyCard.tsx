@@ -3,7 +3,7 @@ import { createOnRampTransaction } from '@/lib/actions/createOnRampTxn'
 import { Button } from '@repo/ui/button'
 import { Card } from '@repo/ui/card'
 import { Select } from '@repo/ui/select'
-import { TextInput } from '@repo/ui/text-input'
+import { Input } from '@repo/ui/text-input'
 import { useState } from 'react'
 
 const SUPPORTED_BANKS = [
@@ -23,16 +23,17 @@ export function AddMoney() {
   const [amount, setAmount] = useState(0)
   const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || '')
   return (
-    <Card title="Add Money">
-      <div className="w-full ">
-        <TextInput
-          label="Amount"
-          placeholder="Amount"
+    <Card title='Add Money'>
+      <div className='w-full '>
+        <Input
+          type='number'
+          label='Amount'
+          placeholder='Amount'
           onChange={(value) => {
             setAmount(Number(value))
           }}
         />
-        <div className="py-4 text-left">Bank</div>
+        <div className='py-4 text-left'>Bank</div>
         <Select
           onSelect={(value) => {
             setRedirectUrl(
@@ -47,7 +48,7 @@ export function AddMoney() {
             return { key: bank.name, value: bank.name }
           })}
         />
-        <div className="flex justify-center pt-4">
+        <div className='flex justify-center pt-4'>
           <Button
             onClick={async () => {
               await createOnRampTransaction(amount * 100, provider)

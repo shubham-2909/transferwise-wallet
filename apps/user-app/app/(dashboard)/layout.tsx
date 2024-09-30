@@ -1,38 +1,33 @@
+import { AppbarClient } from '@/components/AppbarClient'
 import { SidebarItem } from '@/components/SidebarItem'
-import { authOptions } from '@/lib/auth'
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
-
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession(authOptions)
-  if (!session || !session.user) {
-    redirect('/api/auth/login')
-  }
-
   return (
-    <div className='flex'>
-      <div className='w-72 border-r border-slate-300 min-h-screen mr-4 pt-28 hidden md:block'>
-        <div>
-          <SidebarItem href={'/dashboard'} icon={<HomeIcon />} title='Home' />
-          <SidebarItem
-            href={'/transfer'}
-            icon={<TransferIcon />}
-            title='Transfer'
-          />
-          <SidebarItem
-            href={'/transactions'}
-            icon={<TransactionsIcon />}
-            title='Transactions'
-          />
-          <SidebarItem href='/p2p' icon={<P2PIcon />} title='P2P Transfer' />
+    <>
+      <AppbarClient />
+      <div className='flex'>
+        <div className='w-72 border-r border-slate-300 min-h-screen mr-4 pt-28 hidden md:block'>
+          <div>
+            <SidebarItem href={'/dashboard'} icon={<HomeIcon />} title='Home' />
+            <SidebarItem
+              href={'/transfer'}
+              icon={<TransferIcon />}
+              title='Transfer'
+            />
+            <SidebarItem
+              href={'/transactions'}
+              icon={<TransactionsIcon />}
+              title='Transactions'
+            />
+            <SidebarItem href='/p2p' icon={<P2PIcon />} title='P2P Transfer' />
+          </div>
         </div>
+        {children}
       </div>
-      {children}
-    </div>
+    </>
   )
 }
 

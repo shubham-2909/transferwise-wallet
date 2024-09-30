@@ -1,26 +1,28 @@
 'use client'
 
-export const TextInput = ({
-  placeholder,
-  onChange,
-  label,
-}: {
+interface InputProps {
+  label: string
+  type: string
   placeholder: string
   onChange: (_value: string) => void
-  label: string
+}
+
+export const Input: React.FC<InputProps> = ({
+  label,
+  type,
+  placeholder,
+  onChange,
 }) => {
   return (
-    <div className="pt-2">
-      <label className="block mb-2 text-sm font-medium text-gray-900">
+    <div className='mb-4'>
+      <label className='block text-gray-700 text-sm font-bold mb-2'>
         {label}
       </label>
       <input
-        onChange={(e) => onChange(e.target.value)}
-        type="text"
-        id="first_name"
-        autoComplete="off"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        type={type}
         placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        className='shadow appearance-none border rounded w-full block py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-purple-500 focus:border-purple-500 '
       />
     </div>
   )

@@ -5,7 +5,6 @@ interface AppbarProps {
   user?: {
     name?: string | null
   }
-  onSignin: () => Promise<void>
   onSignout: () => Promise<void>
 }
 
@@ -66,7 +65,7 @@ const LogoutIcon = () => (
   </svg>
 )
 
-export const Appbar = ({ user, onSignin, onSignout }: AppbarProps) => {
+export const Appbar = ({ user, onSignout }: AppbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleDropdown = () => {

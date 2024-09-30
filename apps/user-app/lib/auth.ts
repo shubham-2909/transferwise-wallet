@@ -2,7 +2,7 @@ import db from '@repo/db/client'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt'
 import { userSchema } from './types'
-import { AuthOptions, User } from 'next-auth'
+import { AuthOptions } from 'next-auth'
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -10,21 +10,18 @@ export const authOptions: AuthOptions = {
       name: 'Phone number',
       credentials: {
         phone: {
-          label: 'Phone number',
+          label: 'phone',
           type: 'text',
-          placeholder: '1231231231',
         },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        // Do zod validation, OTP validation here
-        console.log(credentials)
-
         const { success, data } = userSchema.safeParse(credentials)
         if (!success) {
           throw new Error('Incorrect credentials')
         }
-        const hashedPassword = await bcrypt.hash(data.password, 10)
+
+        // Find the user by phone number
         const existingUser = await db.user.findFirst({
           where: {
             number: data.phone,
@@ -32,6 +29,7 @@ export const authOptions: AuthOptions = {
         })
 
         if (existingUser) {
+          // Compare the provided password with the stored hashed password
           const passwordValidation = await bcrypt.compare(
             data.password,
             existingUser.password
@@ -41,8 +39,13 @@ export const authOptions: AuthOptions = {
               id: existingUser.id.toString(),
               name: existingUser.name,
             }
+          } else {
+            throw new Error('Invalid password')
           }
         } else {
+          // If the user doesn't exist, create a new user with a hashed password
+          const hashedPassword = await bcrypt.hash(data.password, 10)
+
           const user = await db.user.create({
             data: {
               number: data.phone,
@@ -55,8 +58,6 @@ export const authOptions: AuthOptions = {
             name: user.name,
           }
         }
-
-        return null
       },
     }),
   ],
@@ -66,8 +67,13 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async session({ token, session }) {
-      session.user.id = token.sub
+      if (token.sub) {
+        session.user.id = token.sub
+      }
       return session
     },
+  },
+  pages: {
+    signIn: '/signin',
   },
 }
