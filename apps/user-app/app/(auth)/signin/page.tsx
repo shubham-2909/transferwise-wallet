@@ -24,8 +24,6 @@ export default function Login() {
       password,
       redirect: false, // Prevents auto-redirect
     })
-    console.log(result)
-
     if (result?.error) {
       toast.error(result.error)
     } else {

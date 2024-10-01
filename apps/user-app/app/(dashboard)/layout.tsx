@@ -6,7 +6,7 @@ export default async function Layout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <div className='min-h-screen'>
       <AppbarClient />
       <div className='flex'>
         <div className='w-72 border-r border-slate-300 min-h-screen mr-4 pt-28 hidden md:block'>
@@ -27,7 +27,7 @@ export default async function Layout({
         </div>
         {children}
       </div>
-    </>
+    </div>
   )
 }
 
